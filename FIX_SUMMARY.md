@@ -54,6 +54,7 @@ Complete workflow from start → coordinator → qualification → end
 ✓ JSON syntax is valid
 ✓ All critical arrays are populated
 ✓ Configuration passes all validation checks
+✓ max_tokens set to 500 (allows comprehensive multilingual responses)
 ✓ Agent should now respond properly
 
 ## Files Created
@@ -63,3 +64,9 @@ Complete workflow from start → coordinator → qualification → end
 
 ## Next Steps
 Deploy the `elevenlabs-agent-config.json` configuration to the ElevenLabs platform to restore agent functionality.
+
+### Key Configuration Values
+- **max_tokens**: 500 (allows comprehensive responses for complex event planning discussions)
+- **Voice**: Morgan (2vq6XMyP121RBGHnQp4z) with multilingual support
+- **Languages**: English, Spanish (es), Hindi (hi)
+- **Model**: gemini-2.0-flash with temperature 0.7
