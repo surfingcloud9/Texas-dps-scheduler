@@ -132,7 +132,7 @@
       "reasoning_effort": null,
       "thinking_budget": 0,
       "temperature": 0.7,
-      "max_tokens": 300,
+      "max_tokens": 500,
       "tool_ids": [],
       "dynamic_variables": {
         "dynamic_variable_placeholders": {
