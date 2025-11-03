@@ -13,6 +13,10 @@
 const fs = require('fs');
 const path = require('path');
 
+// Constants
+const DESCRIPTION_MAX_LENGTH = 60;
+const DESCRIPTION_SHORT_LENGTH = 50;
+
 // ANSI color codes for terminal output
 const colors = {
     reset: '\x1b[0m',
@@ -193,7 +197,7 @@ class AgentConfigValidator {
         // List configured tools
         tools.forEach(tool => {
             if (tool.name) {
-                logInfo(`  - ${tool.name}: ${tool.description?.substring(0, 60)}...`);
+                logInfo(`  - ${tool.name}: ${tool.description?.substring(0, DESCRIPTION_MAX_LENGTH)}...`);
             }
         });
     }
@@ -246,7 +250,7 @@ class AgentConfigValidator {
             this.passed.push(`data_collection: ${dataCollection.length} field(s) configured`);
             dataCollection.forEach(field => {
                 if (field.id) {
-                    logInfo(`  - ${field.id} (${field.type}): ${field.description?.substring(0, 50)}...`);
+                    logInfo(`  - ${field.id} (${field.type}): ${field.description?.substring(0, DESCRIPTION_SHORT_LENGTH)}...`);
                 }
             });
         }
@@ -270,7 +274,7 @@ class AgentConfigValidator {
         if (criteria.length === 0) {
             this.warnings.push('evaluation.criteria is empty - conversation quality cannot be evaluated');
         } else {
-            this.passed.push(`evaluation.criteria: ${criteria.length} criterion(ia) configured`);
+            this.passed.push(`evaluation.criteria: ${criteria.length} ${criteria.length === 1 ? 'criterion' : 'criteria'} configured`);
             criteria.forEach(criterion => {
                 if (criterion.name) {
                     logInfo(`  - ${criterion.name} (${criterion.type})`);
