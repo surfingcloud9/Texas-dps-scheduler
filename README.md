@@ -24,3 +24,21 @@ Honesty, I don't know. Just dont abuse it :)
 
 # How to use this project
 You can access the wiki [here](https://github.com/phamleduy04/texas-dps-scheduler/wiki/Installation)
+
+# ElevenLabs Voice Agent Debug Tools
+
+This repository also includes tools for debugging and validating ElevenLabs voice agent configurations.
+
+## Quick Links
+- 📖 [Debug Guide](ELEVENLABS_AGENT_DEBUG.md) - Comprehensive troubleshooting and restoration guide
+- 📚 [Tools README](AGENT_CONFIG_README.md) - Usage instructions for validation tools
+- ✅ [Validator Tool](validate-agent-config.js) - Automated configuration validation
+
+## Quick Start
+
+Validate an ElevenLabs agent configuration:
+```bash
+node validate-agent-config.js your-config.json
+```
+
+See [AGENT_CONFIG_README.md](AGENT_CONFIG_README.md) for more information.
