@@ -1,0 +1,172 @@
+{
+  "description": "This is the WORKING configuration with all required fields populated",
+  "asr": {
+    "quality": "high",
+    "provider": "elevenlabs",
+    "user_input_audio_format": "ulaw_8000",
+    "keywords": []
+  },
+  "turn": {
+    "turn_timeout": 7,
+    "silence_end_call_timeout": -1,
+    "mode": "turn",
+    "turn_eagerness": "normal"
+  },
+  "tts": {
+    "model_id": "eleven_multilingual_v2",
+    "voice_id": "2vq6XMyP121RBGHnQp4z",
+    "supported_voices": [
+      {
+        "label": "Morgan — Hindi",
+        "voice_id": "2vq6XMyP121RBGHnQp4z",
+        "description": "Use this voice whenever the caller speaks Hindi or the detected language is Hindi (hi).\nContinue 100% in Hindi unless the caller switches languages. Warm, friendly, professional event host tone.\nNo translations back to English.",
+        "language": "hi",
+        "model_family": "multilingual",
+        "optimize_streaming_latency": null,
+        "stability": null,
+        "speed": null,
+        "similarity_boost": null
+      },
+      {
+        "label": "Morgan — Spanish",
+        "voice_id": "2vq6XMyP121RBGHnQp4z",
+        "description": "Use this voice whenever the caller speaks Spanish or the detected language is Spanish (es).\nContinue 100% in Spanish unless the caller switches languages. Warm, friendly, professional event host tone.\nNo translations back to English.",
+        "language": "es",
+        "model_family": "multilingual",
+        "optimize_streaming_latency": null,
+        "stability": null,
+        "speed": null,
+        "similarity_boost": null
+      }
+    ],
+    "agent_output_audio_format": "pcm_16000",
+    "optimize_streaming_latency": 4,
+    "stability": 0.65,
+    "language_presets": {}
+  },
+  "evaluation": {
+    "criteria": [
+      {
+        "id": "language_detection",
+        "name": "Language Detection",
+        "type": "prompt",
+        "conversation_goal_prompt": "Determine whether the user's language throughout the conversation was primarily English, Spanish, or mixed.  \nIf the user switched languages mid-conversation, note the transition point and how smoothly the agent adapted.  \nRate as:\n- \"English\" if 90% or more of user input is English.\n- \"Spanish\" if 90% or more of user input is Spanish.\n- \"Mixed\" if both appear substantially or if the agent switched seamlessly between languages.  \nExplain your reasoning briefly.",
+        "use_knowledge_base": false
+      }
+    ]
+  },
+  "data_collection": [
+    {
+      "type": "string",
+      "description": "The main language used by the user\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "primary_language"
+    },
+    {
+      "type": "string",
+      "description": "The secondary or alternate language used\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "secondary_language"
+    },
+    {
+      "type": "boolean",
+      "description": "Whether the user switched languages\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "language_switch_detected"
+    },
+    {
+      "type": "integer",
+      "description": "Rating from 1–5 of how well the agent adapted\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "agent_adaptation_score"
+    },
+    {
+      "type": "string",
+      "description": "Notes about confidence or performance\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "confidence_notes"
+    },
+    {
+      "type": "string",
+      "description": "Description of when the switch occurred\n",
+      "enum": null,
+      "is_system_provided": false,
+      "dynamic_variable": "",
+      "constant_value": "",
+      "id": "switch_point_summary"
+    }
+  ],
+  "agent": {
+    "first_message": "\"Hey there! Thanks for calling SurfingCloud9 Entertainment—this is Morgan. I'm really glad you reached out today. So tell me, what kind of event are you planning?\"\n",
+    "language": "en",
+    "prompt": {
+      "prompt": "# Personality\nYou are Morgan, the voice of {{company_name}}. You sound confident, grounded, and genuinely warm. You make people feel like they're already in good hands. Never pushy—just clear, upbeat, and professional.\n\n# Environment\nYou're speaking with potential clients over the phone in {{service_area}}. You represent a premium company known for exceptional DJs, lighting, karaoke, and live entertainment experiences.\n\n# Tone\nFriendly, conversational, and professional.  \nPace naturally—no rush. Use affirmations like \\\"Got it\\\" or \\\"Sure thing\\\" instead of filler words.  \nSound human, not scripted. Smile in your voice.\n\n# Language\nIf the caller speaks Spanish or Hindi, continue the conversation entirely in that language. Otherwise, stay in English.\n\n# Conversation Flow\n\n1. **Greet and Engage**\n   - Example: \\\"Hi! This is Morgan with {{company_name}}. What kind of event are you planning?\\\"\n\n2. **Qualify and Discover**\n   - Ask for: event type, date/timeframe, location/venue, guest count, and vibe.\n   - Ask what's most important to them: music style, MC presence, lighting, or interactivity.\n\n3. **Recommend and Guide**\n   - Recommend one fitting option naturally, not as a list.  \n   - If needed, reference: {{packages_summary}}  \n   - Suggest one add-on (like uplighting, karaoke, or a photo booth).\n\n4. **Next Steps**\n   - Offer to check availability or send a quote.  \n   - If they want to see available dates, share: {{calendar_url}}  \n   - If they want to talk contracts or deposits, say you can transfer them and call the transfer tool with {{transfer_target}}.  \n   - If the transfer tool isn't available, offer to have someone call them back at {{sales_phone}}.\n\n# Guardrails\nStay focused on entertainment services provided by {{company_name}}.  \nIf they ask about something outside your scope (like payments or contracts), either transfer them or promise a callback.  \nBe honest if you don't know something—keep it real, keep it friendly.",
+      "llm": "gemini-2.0-flash",
+      "temperature": 0.7,
+      "max_tokens": 1,
+      "tool_ids": []
+    },
+    "knowledge_base": [
+      {
+        "type": "text",
+        "name": "SurfingCloud9 Entertainment - Complete Service Guide",
+        "id": "QwDZxaB3hO3iuLEQsYpo",
+        "usage_mode": "auto"
+      }
+    ],
+    "tools": [
+      {
+        "type": "system",
+        "name": "end_call",
+        "description": "Allows Morgan to end the call politely once all event details and contact information have been collected.",
+        "response_timeout_secs": 20,
+        "disable_interruptions": false,
+        "force_pre_tool_speech": false,
+        "assignments": [],
+        "tool_call_sound": null,
+        "tool_call_sound_behavior": "auto",
+        "params": {
+          "system_tool_type": "end_call"
+        }
+      },
+      {
+        "type": "system",
+        "name": "language_detection",
+        "description": "Automatically detect the caller's language from their first utterance and any later switches. \nIf the caller uses Spanish, respond 100% in Spanish. If the caller uses Hindi, respond 100% in Hindi. \nDo not announce that you detected a language—just continue naturally in that language. \nKeep SurfingCloud9's warm, concierge tone and rephrase pricing/package details naturally in the target language. \nIf the caller switches languages mid-call, seamlessly switch to the new language. \nIf the caller asks to continue in English, switch back to English.",
+        "response_timeout_secs": 20,
+        "disable_interruptions": false,
+        "force_pre_tool_speech": false,
+        "assignments": [],
+        "tool_call_sound": null,
+        "tool_call_sound_behavior": "auto",
+        "params": {
+          "system_tool_type": "language_detection"
+        }
+      }
+    ]
+  },
+  "languages": ["es", "hi"],
+  "workflow": {
+    "nodes": {
+      "node_01k951k24jft6qxsrfaafbhpws": {
+        "type": "start",
+        "edge_order": ["edge_4301k951k24ke50sx8vhpgcwjsdx"]
+      }
+    }
+  }
+}
